@@ -7,7 +7,7 @@ var win=false;
 //Scrollanje
 window.addEventListener('wheel', function(e) {
     if (e.deltaY < 0) {
-	 if(gustoca>0)
+        if(gustoca>0)
       gustoca--;
     }
     if (e.deltaY > 0) {
@@ -269,9 +269,9 @@ var img1 = new Image();
   
 }
 
-
+//ne dela se tak, ali dela, to je visa siptarija
 function TestInput()
-{
+{setTimeout(function(){ 
     if((parseFloat(document.forms["myForm"]["a"].value) || document.forms["myForm"]["a"].value == '0') 
     && (parseFloat(document.forms["myForm"]["b"].value) || document.forms["myForm"]["b"].value == '0') 
     && (parseFloat(document.forms["myForm"]["c"].value) || document.forms["myForm"]["c"].value == '0'))
@@ -280,9 +280,12 @@ function TestInput()
     let b = Number(document.forms["myForm"]["b"].value);
     let c = Number(document.forms["myForm"]["c"].value);
     
-    DrawGraph(jednadzba, a, b, c);
+    DrawGraph(jednadzba, a, b, c); 
+   
     Test(a, b, c);
-    }   
+    }  
+    
+}, 1000); //smiri zivce bre
 }
 
 //Testira dal je pogodil
