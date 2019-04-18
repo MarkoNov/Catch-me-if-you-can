@@ -7,6 +7,7 @@ var win=false;
 //Scrollanje
 window.addEventListener('wheel', function(e) {
     if (e.deltaY < 0) {
+	 if(gustoca>0)
       gustoca--;
     }
     if (e.deltaY > 0) {
