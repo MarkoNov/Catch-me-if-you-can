@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+ <html>
+    <head>
+        <meta charset="UTF-8">
+
+        <title>Catch me if you can</title>       
+
+        <link rel="stylesheet" href="/css.css?">
+       <link rel="icon" href="/icon.ico" type="image/x-icon">
+
+    </head>
+
+    <body onload="DrawGrid()" onresize="DrawGrid()">
+
+        <canvas id="myCanvas">
+        Your browser does not support the HTML5 canvas tag.</canvas>
+
+        <script type="text/javascript" src="/javascript.js?"></script>
+
+        <div class="rectangle"></div>
+
+        <form id=myForm >
+          <a id="jednadzba" type="text"> y = a &nbsp;&nbsp;* ( x + b &nbsp;&nbsp;&nbsp;) ^ 2 + c</a>
+          <input id="a" type="text" placeholder="a" onkeyup="TestInput()" autofocus/>
+          <input id="b" type="text" placeholder="b" onkeyup="TestInput()" autofocus/>
+          <input id="c" type="text" placeholder="c" onkeyup="TestInput()" autofocus/>
+        </form>
+
+        <!--
+        <div class="vertical-menu">
+            <a href="#" class="active">Home</a>
+            <a href="#">Link 1</a>
+            <a href="#">Link 2</a>
+            <a href="#">Link 3</a>
+            <a href="#">Link 4</a>
+          </div> -->
+
+    </body>
+ </html>
