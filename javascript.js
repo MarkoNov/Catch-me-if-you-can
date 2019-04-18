@@ -186,7 +186,7 @@ win=false;
 ctx.setTransform(1, 0, 0, -1, w/2 , h/2);
 
 MakeOpponent(brojevix, brojeviy, p, w, h, xmax, xmin, ymax, ymin);
-MakeBall(brojevix, brojeviy, p, w, h);
+//MakeBall(brojevix, brojeviy, p, w, h);
 }
 
 
