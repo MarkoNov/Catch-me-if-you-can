@@ -204,7 +204,9 @@ function MakeOpponent(brojevix, brojeviy, p, w, h)
     for(let i=0; i<numOfOpponents; i++)
     {
         //randomly places opponent on x positive
-        opponent[i]=[-(Math.floor((Math.random() * ((brojevix/2)-4)))+4), Math.floor((Math.random() * (brojeviy/2))-2)*(Math.random() < 0.5 ? -1 : 1)];
+        //opponent[i]=[-(Math.floor((Math.random() * ((brojevix/2)-4)))+4), Math.floor((Math.random() * (brojeviy/2))-2)*(Math.random() < 0.5 ? -1 : 1)];
+
+        opponent[i]=[Math.floor((Math.random() * (brojevix/2)))*(Math.random() < 0.5 ? -1 : 1), Math.floor(Math.random() * (brojeviy/2))*(Math.random() < 0.5 ? -1 : 1)];
         /*var img = new Image();
 	  img.src = "https://www.dominatorhoop.com/wp-content/uploads/2018/09/60-inch-transparent-square-768x797.png";
         img.onload = function () {*/
