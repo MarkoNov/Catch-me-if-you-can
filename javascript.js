@@ -3,6 +3,7 @@ let ctx = c.getContext("2d");
 
 var gustoca=64;
 var win=false;
+let sjebanekoordinate=false;
 
 //Scrollanje
 window.addEventListener('wheel', function(e) {
@@ -13,12 +14,13 @@ window.addEventListener('wheel', function(e) {
     if (e.deltaY > 0) {
       gustoca++;
     }
-    DrawGrid();
+    win=false;
+    DrawGrid(false);
   });
 
 
 //Crta x, y, itd.
-function DrawGrid(){
+function DrawGrid(keepOpponent){
 
 c.width = window.innerWidth;
 c.height = window.innerHeight;
@@ -182,11 +184,11 @@ for(let i=1; i<brojeviy; i++)
     ctx.fillText(-i.toString(), xmin/40, i*p);
 }
 
-win=false;
+
 
 ctx.setTransform(1, 0, 0, -1, w/2 , h/2);
 
-MakeOpponent(brojevix, brojeviy, p, w, h, xmax, xmin, ymax, ymin);
+MakeOpponent(brojevix, brojeviy, p, w, h, xmax, xmin, ymax, ymin, keepOpponent);
 //MakeBall(brojevix, brojeviy, p, w, h);
 }
 
@@ -199,14 +201,17 @@ let numOfOpponents = 1;
     let opponent = [numOfOpponents];
 
 
-function MakeOpponent(brojevix, brojeviy, p, w, h)
+function MakeOpponent(brojevix, brojeviy, p, w, h, xmax, xmin, ymax, ymin, keepOpponent)
 {
     for(let i=0; i<numOfOpponents; i++)
     {
         //randomly places opponent on x positive
         //opponent[i]=[-(Math.floor((Math.random() * ((brojevix/2)-4)))+4), Math.floor((Math.random() * (brojeviy/2))-2)*(Math.random() < 0.5 ? -1 : 1)];
 
-        opponent[i]=[Math.floor((Math.random() * (brojevix/2)))*(Math.random() < 0.5 ? -1 : 1), Math.floor(Math.random() * (brojeviy/2))*(Math.random() < 0.5 ? -1 : 1)];
+    if(!keepOpponent) 
+    { opponent[i]=[Math.floor((Math.random() * (brojevix/2)))*(Math.random() < 0.5 ? -1 : 1), Math.floor(Math.random() * (brojeviy/2))*(Math.random() < 0.5 ? -1 : 1)];
+        sjebanekoordinate=true;
+    }
         /*var img = new Image();
 	  img.src = "https://www.dominatorhoop.com/wp-content/uploads/2018/09/60-inch-transparent-square-768x797.png";
         img.onload = function () {*/
@@ -230,12 +235,13 @@ function MakeOpponent(brojevix, brojeviy, p, w, h)
         ctx.fillStyle = gradient;
         ctx.fill();
         ctx.closePath();
-
-
-            //- JER SU BRNUTI, zbog slike; probaj maknuti, bus skuzil :P
+/*
+if(sjebanekoordinate)
+        {    //- JER SU BRNUTI, zbog slike; probaj maknuti, bus skuzil :P
             opponent[i][0]=-opponent[i][0];
             opponent[i][1]=-opponent[i][1];
-
+            sjebanekoordinate=false;
+        }*/
          //}
 /*
         ctx.beginPath();
@@ -285,13 +291,13 @@ function TestInput()
     Test(a, b, c);
     }  
     
-}, 1000); //smiri zivce bre
+}, 500); //smiri zivce bre
 }
 
 //Testira dal je pogodil
 function Test(a, b, c)
 {
-    if(!win && opponent[0][1]==a*((opponent[0][0]+b)*(opponent[0][0]+b))+c)
+    if(!win && -opponent[0][1]==a*((-opponent[0][0]+b)*(-opponent[0][0]+b))+c)
     {
         window.alert("YOU WIN!\nTry scrolling!");
         win=!win;
@@ -299,7 +305,7 @@ function Test(a, b, c)
 }
 
 function DrawGraph(jednadzba, a, b ,c)
-{   
+{   DrawGrid(true);
     let p=(window.innerWidth+window.innerHeight)/gustoca;
     ctx.setTransform(1, 0, 0, -1, window.innerWidth/2 , window.innerHeight/2);
     a/=p;
