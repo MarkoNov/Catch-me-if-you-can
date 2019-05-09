@@ -297,10 +297,13 @@ function TestInput()
 //Testira dal je pogodil
 function Test(a, b, c)
 {
-    if(!win && -opponent[0][1]==a*((-opponent[0][0]+b)*(-opponent[0][0]+b))+c)
+    if(!win)
     {
+        if(-(opponent[0][1]*opponent[0][1])==a*(-opponent[0][0]-b)+c || (opponent[0][1]*opponent[0][1]==a*(-opponent[0][0]-b)+c))
+        {
         window.alert("YOU WIN!\nTry scrolling!");
         win=!win;
+        }
     }
 }
 
@@ -308,13 +311,13 @@ function DrawGraph(jednadzba, a, b ,c)
 {   DrawGrid(true);
     let p=(window.innerWidth+window.innerHeight)/gustoca;
     ctx.setTransform(1, 0, 0, -1, window.innerWidth/2 , window.innerHeight/2);
-    a/=p;
+    a*=p;
     b*=p;
-    c*=p;
+    c*=p*p;
     
     for(let x= -2000; x<2000;)
     {
-        y=(a*(x+b)*(x+b))+c;
+        y=Math.sqrt(a*(x-b)+c);
         y=parseInt(y);
         ctx.beginPath();              
         ctx.lineWidth = "2";
@@ -322,12 +325,31 @@ function DrawGraph(jednadzba, a, b ,c)
         ctx.moveTo(x, y);
 
         x++;
-        y=(a*(x+b)*(x+b))+c;
+
+        y=Math.sqrt(a*(x-b)+c);
         y=parseInt(y);
         ctx.lineTo(x, y);
         ctx.stroke();
-        ctx.closePath();   
+        ctx.closePath();  
         
+        x--;
+
+        y=Math.sqrt(a*(x-b)+c);
+        y=-parseInt(y);
+        ctx.beginPath();              
+        ctx.lineWidth = "2";
+        ctx.strokeStyle = "black";
+        ctx.moveTo(x, y);
+
+        x++;
+
+        y=Math.sqrt(a*(x-b)+c);
+        y=-parseInt(y);
+        ctx.lineTo(x, y);
+        ctx.stroke();
+        ctx.closePath();
+
+
     }
 
 }
